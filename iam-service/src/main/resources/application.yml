@@ -1,0 +1,23 @@
+# Server Configuration
+server:
+  port: 9091
+
+# Database Configuration (PostgreSQL)
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/iam
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update # In a production environment, use 'validate' or a migration tool like Flyway/Liquibase
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  access-token-expiration-ms: ${ACCESS_TOKEN_EXPIRATION_MS}
+  refresh-token-expiration-ms: ${REFRESH_TOKEN_EXPIRATION_MS}
