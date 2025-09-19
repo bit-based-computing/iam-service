@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Operator extends Base {
+public class Operator extends Auditable {
 
     @Column(nullable = false)
     private String firstName;

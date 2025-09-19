@@ -12,7 +12,7 @@ import java.util.*;
 @Builder
 @Entity
 @Table(name = "roles")
-public class Role extends Base{
+public class Role extends Auditable{
 
     @Column(nullable = false, unique = true)
     private String name;  // e.g. "ADMIN", "USER", "OPERATOR", "PRODUCT", "ORDER"

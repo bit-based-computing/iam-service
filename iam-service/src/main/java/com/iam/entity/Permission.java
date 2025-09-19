@@ -12,7 +12,7 @@ import java.util.*;
 @Builder
 @Entity
 @Table(name = "permissions")
-public class Permission extends Base{
+public class Permission extends Auditable{
 
     @Column(nullable = false, unique = true)
     private String name;  // e.g. "CREATE", "READ", "UPDATE", "DELETE", "VIEW_LIST", "ALL"
