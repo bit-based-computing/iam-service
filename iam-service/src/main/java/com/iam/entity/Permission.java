@@ -1,9 +1,8 @@
 package com.iam.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,12 +11,12 @@ import java.util.*;
 @Builder
 @Entity
 @Table(name = "permissions")
-public class Permission extends Auditable{
+public class Permission extends Auditable {
 
-    @Column(nullable = false, unique = true)
-    private String name;  // e.g. "CREATE", "READ", "UPDATE", "DELETE", "VIEW_LIST", "ALL"
+  @Column(nullable = false, unique = true)
+  private String name; // e.g. "CREATE", "READ", "UPDATE", "DELETE", "VIEW_LIST", "ALL"
 
-    @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles = new HashSet<>();
+  @Builder.Default
+  @ManyToMany(mappedBy = "permissions")
+  private Set<Role> roles = new HashSet<>();
 }
-

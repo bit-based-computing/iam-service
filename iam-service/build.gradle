@@ -2,8 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'com.diffplug.spotless' version '6.25.0'
 }
-
 
 group = 'com.iam'
 version = '0.0.1-SNAPSHOT'
@@ -12,29 +12,40 @@ java {
     sourceCompatibility = '21'
 }
 
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
+// ----------------------------
+// Configure Spotless
+// ----------------------------
+spotless {
+    java {
+        removeUnusedImports()
+        googleJavaFormat()
+    }
+}
 
+
+// ----------------------------
+// Dependencies
+// ----------------------------
+dependencies {
     // Spring Boot Starters
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-
     // Database
     runtimeOnly 'org.postgresql:postgresql'
 
-    // JWT library for token creation and validation
+    // JWT library
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
-    // Lombok (compile-time only)
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
@@ -43,6 +54,17 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 }
 
+// ----------------------------
+// Tasks configuration
+// ----------------------------
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.named('check') {
+    dependsOn 'spotlessApply'
+}
+
+tasks.named('build') {
+    dependsOn 'spotlessApply' // format code before building
 }
