@@ -1,4 +1,4 @@
-package com.iam.entity;
+package com.iam.operator.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
